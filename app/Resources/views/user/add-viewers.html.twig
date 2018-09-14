@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Add viewers</h1>
+    <form action="{{ path('post_viewer') }}" method="post">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Photo</th>
+            <th>Pseudo</th>
+            <th>Datenaissance</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('users_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>
+                    <img src="{{ asset('/uploads/avatars/')~user.photo }}" class="rounded-circle" width="40" height="40">
+                </td>
+                <td>{{ user.pseudo }}</td>
+                <td>{% if user.dateNaissance %}{{ user.dateNaissance|date('d/m/Y') }}{% endif %}</td>
+                <td>
+                    <input type="checkbox" class="form-control"  name="visitors[]" value="{{ user.id }}"/>
+                </td>
+            </tr>
+        {% endfor %}
+            <button type="submit" class="btn btn-primary">Add viewers</button>
+        </tbody>
+    </table>
+    </form>
+{% endblock %}

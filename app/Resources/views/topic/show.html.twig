@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Topic</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ topic.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ topic.title }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ topic.oUser.nom ~ topic.oUser.prenom}}</td>
+            </tr>
+        </tbody>
+    </table>
+            <a href="{{ path('topics_index') }}" class="btn btn-default">Back to the list</a>
+            <a href="{{ path('topics_edit', { 'id': topic.id }) }}" class="btn btn-primary">Edit</a>
+            {{ form_start(delete_form,{'attr':{'class':'form'}}) }}
+                <input type="submit" value="Delete" class="btn btn-danger">
+            {{ form_end(delete_form) }}
+{% endblock %}

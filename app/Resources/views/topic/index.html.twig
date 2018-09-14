@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Topics list</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title
+                <th>Auteur</th>
+                <th>Nombres de vue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr>
+                <td><a href="{{ path('topics_show', { 'id': topic.id }) }}">{{ topic.id }}</a></td>
+                <td>{{ topic.title }}</td>
+                <td>{{ topic.oUser.nom ~ topic.oUser.prenom }}</td>
+                <td>
+                    {{ 1 }}
+                </td>
+                <td>
+                    <a href="{{ path('topics_show', { 'id': topic.id }) }}" class="btn btn-default">show</a>
+                    <a href="{{ path('topics_edit', { 'id': topic.id }) }}" class="btn btn-primary">edit</a>
+                    <a href="{{ path('topics_viewer',{'id': topic.id}) }}" class="btn btn-default">Add visitors</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        <a href="{{ path('topics_new') }}" class="btn btn-primary">Create a new topic</a>
+{% endblock %}

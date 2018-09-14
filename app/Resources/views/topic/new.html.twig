@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Topic creation</h1>
+
+    {{ form_start(form,{'attr':{'class':'form'}}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" class="btn btn-primary"/>
+    {{ form_end(form) }}
+    <a href="{{ path('topics_index') }}" class="btn btn-default">Back to the list</a>
+{% endblock %}
