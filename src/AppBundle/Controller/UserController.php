@@ -19,23 +19,27 @@ class UserController extends Controller
      *
      * @Route("/", name="users_index")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
-
+        $users = $this->get('knp_paginator')->paginate($users,$request->query->get('page',1),3);
         return $this->render('user/index.html.twig', array(
             'users' => $users,
         ));
     }
-
+    
     /**
      * Creates a new user entity.
      *
      * @Route("/new", name="users_new")
      * @Method({"GET", "POST"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
      */
     public function newAction(Request $request)
     {

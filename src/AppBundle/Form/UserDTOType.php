@@ -11,10 +11,11 @@
     
     namespace AppBundle\Form;
     
+    
     use AppBundle\DTO\UserDTO;
+    use Proxies\__CG__\AppBundle\Entity\User;
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-    use Symfony\Component\Form\Extension\Core\Type\HiddenType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,14 +23,18 @@
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('bIsSelected',CheckboxType::class)
-                ->add('id',HiddenType::class);
+            $builder->add('id',CheckboxType::class)
+                    ->add('nom')
+                    ->add('prenom')
+                    ->add('pseudo')
+                    ->add('dateNaissance')
+                    ->add('photo');
         }
         
         public function configureOptions(OptionsResolver $resolver)
         {
-            $resolver->setDefaults([
-                'data_class' => UserDTO::class,
-            ]);
+            $resolver->setDefaults(array(
+                'data_class'=>UserDTO::class,
+            ));
         }
     }

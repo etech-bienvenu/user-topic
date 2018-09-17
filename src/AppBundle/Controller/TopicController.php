@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\DTO\TopicDTO;
+use AppBundle\DTO\UserDTO;
 use AppBundle\Entity\Topic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -153,10 +155,11 @@ class TopicController extends Controller
      */
     public function addVisitor($id){
         $em = $this->getDoctrine()->getManager();
-    
+        
         $users = $em->getRepository('AppBundle:User')->findAll();
+        
         $topic = $em->getRepository(Topic::class)->find($id);
-        //$topic->addViewer()
+        
         return $this->render('user/add-viewers.html.twig', array(
             'users' => $users,
             'topic' => $topic
@@ -166,15 +169,13 @@ class TopicController extends Controller
     /**
      * @Route("/viewers",name="post_viewer")
      * @Method("POST")
-     * @return Response
+     * @return void
      * @param Request $request
      * @param $id
      */
     public function postVisitors(Request $request,$id){
         $data = $request->request->all();
+        var_dump($data);
         
-        return $this->render('user/post-viewers',array(
-            'data'=>$data,
-        ));
     }
 }

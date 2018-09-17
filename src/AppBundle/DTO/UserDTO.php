@@ -14,7 +14,11 @@
     class UserDTO
     {
         private $id;
-        private $bIsSelected;
+        private $nom;
+        private $prenom;
+        private $pseudo;
+        private $dateNaissance;
+        private $photo;
     
         /**
          * @return mixed
@@ -35,17 +39,82 @@
         /**
          * @return mixed
          */
-        public function getBIsSelected()
+        public function getNom()
         {
-            return $this->bIsSelected;
+            return $this->nom;
         }
     
         /**
-         * @param mixed $bIsSelected
+         * @param mixed $nom
          */
-        public function setBIsSelected($bIsSelected)
+        public function setNom($nom)
         {
-            $this->bIsSelected = $bIsSelected;
+            $this->nom = $nom;
         }
+    
+        /**
+         * @return mixed
+         */
+        public function getPrenom()
+        {
+            return $this->prenom;
+        }
+    
+        /**
+         * @param mixed $prenom
+         */
+        public function setPrenom($prenom)
+        {
+            $this->prenom = $prenom;
+        }
+    
+        /**
+         * @return mixed
+         */
+        public function getPseudo()
+        {
+            return $this->pseudo;
+        }
+    
+        /**
+         * @param mixed $pseudo
+         */
+        public function setPseudo($pseudo)
+        {
+            $this->pseudo = $pseudo;
+        }
+    
+        /**
+         * @return mixed
+         */
+        public function getDateNaissance()
+        {
+            return $this->dateNaissance;
+        }
+    
+        /**
+         * @param mixed $dateNaissance
+         */
+        public function setDateNaissance($dateNaissance)
+        {
+            $this->dateNaissance = $dateNaissance;
+        }
+    
+        /**
+         * @return mixed
+         */
+        public function getPhoto()
+        {
+            return $this->photo;
+        }
+    
+        /**
+         * @param mixed $photo
+         */
+        public function setPhoto($photo)
+        {
+            $this->photo = $photo;
+        }
+        
         
     }

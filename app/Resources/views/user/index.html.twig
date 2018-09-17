@@ -2,16 +2,18 @@
 
 {% block body %}
     <h1>Users list</h1>
-
+    <div class="count">
+        {{ users.getTotalItemCount }}
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
+                <th>{{ knp_pagination_sortable(users, 'Id', 'id') }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Nom', 'nom') }}</th>
+                <th>{{ knp_pagination_sortable(users, 'Prenom', 'prenom') }}</th>
                 <th>Photo</th>
                 <th>Pseudo</th>
-                <th>Datenaissance</th>
+                <th>{{ knp_pagination_sortable(users, 'Date naisance', 'dateNaissance') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,5 +36,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(users) }}
+    </div>
     <a href="{{ path('users_new') }}" class="btn btn-primary">Create a new user</a>
 {% endblock %}

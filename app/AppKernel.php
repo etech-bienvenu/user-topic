@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
+            new \Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -47,7 +48,14 @@ class AppKernel extends Kernel
     {
         return dirname(__DIR__).'/var/logs';
     }
-
+    
+    /**
+     * DESCRIPTION function
+     *
+     * la declaration de  visisbilité doit être OBLIGATOIRE
+     * @param LoaderInterface $loader
+     * @throws Exception
+     */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(function (ContainerBuilder $container) {
