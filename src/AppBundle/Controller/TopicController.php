@@ -69,7 +69,7 @@ class TopicController extends Controller
     /**
      * Finds and displays a topic entity.
      *
-     * @Route("/{id}", name="topics_show")
+     * @Route("/{id}", name="topics_show",requirements={"d"="\d+"})
      * @Method("GET")
      * @return \Symfony\Component\HttpFoundation\Response
      * @param Topic $topic
@@ -87,7 +87,7 @@ class TopicController extends Controller
     /**
      * Displays a form to edit an existing topic entity.
      *
-     * @Route("/{id}/edit", name="topics_edit")
+     * @Route("/{id}/edit", name="topics_edit",requirements={"d"="\d+"})
      * @Method({"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @param Request $request
@@ -115,7 +115,7 @@ class TopicController extends Controller
     /**
      * Deletes a topic entity.
      *
-     * @Route("/{id}", name="topics_delete")
+     * @Route("/{id}", name="topics_delete",requirements={"id"="\d+"})
      * @Method("DELETE")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @param Request $request
@@ -151,54 +151,4 @@ class TopicController extends Controller
         ;
     }
     
-    /**
-     * @Route("/{id}/viewers",name="topics_viewer")
-     * @Method({"GET","POST"})
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @param Request $request
-     * @param $id
-     */
-    public function addVisitor(Request $request,$id){
-        $em = $this->getDoctrine()->getManager();
-        $topic = $em->getRepository(Topic::class)->find($id);
-        
-        $users = $em->getRepository('AppBundle:User')->findAll();
-        $formBuilder = $this->createFormBuilder();
-        
-        foreach ($users as $user){
-            $formBuilder->add($user->getId(),CheckboxType::class,
-                array('label'=> $user->getNom(),'required' => false)
-            );
-        }
-        $formBuilder->add('add',SubmitType::class);
-        
-        $form = $formBuilder->getForm();
-        $form->handleRequest($request);
-        if ($form->isValid() && $form->isSubmitted()){
-            $this->redirectToRoute("topics_index");
-            $users_id = $form->getData();
-            $userToDelete = [];
-            foreach ($users_id as $id=>$value){
-                if ($users_id[$id]===true){
-                           array_push($userToDelete,$users_id[$id]);
-                }
-            }
-        }
-        return $this->render('user/add-viewers.html.twig', array(
-            'forms' => $form->createView(),
-            'topic' => $topic,
-            'users' => $users,
-        ));
-    }
-    
-    /**
-     * @Route("/viewers",name="post_viewer")
-     * @Method("GET")
-     * @return void
-     * @param $data
-     */
-    public function postVisitors($data){
-       dump($data);
-       
-    }
 }

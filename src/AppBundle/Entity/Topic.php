@@ -117,13 +117,14 @@ class Topic
         $this->oUser = $oUser;
     }
     
-    public function addViewer(User $oUser){
+    public function addViewer($oUser){
         if($this->aUserVueTopics->contains($oUser)){
             return;
         }else{
             $userVueTopic = new UserVuTopic();
             $userVueTopic->setOTopic($this);
             $userVueTopic->setOUser($oUser);
+            
             $this->aUserVueTopics->add($userVueTopic);
         }
     }

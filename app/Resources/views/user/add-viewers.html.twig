@@ -13,14 +13,15 @@
         </tr>
         </thead>
         <tbody>
-        <form method="post" action="{{ path('topics_viewer',{'id':topic.id}) }}" >
-                {% for user in users %}
+        <form method="post" action="{{ path('post_visitor') }}" >
+            <input type="hidden" name="topicId" value="{{ topic.id }}">
+            {% for user in users %}
                     <tr>
                         <td>{{ user.nom }}</td>
                         <td>{{ user.prenom }}</td>
                         <td>{{ user.pseudo }}</td>
                         <td>
-                            {{ form_row(forms[user.id]) }}
+                            <input type="checkbox" name="users[{{ user.id }}]" value="{{ user.id }}"/>
                         </td>
                     </tr>
                 {% endfor %}

@@ -25,7 +25,7 @@
                 <td>
                     <a href="{{ path('topics_show', { 'id': topic.id }) }}" class="btn btn-default">show</a>
                     <a href="{{ path('topics_edit', { 'id': topic.id }) }}" class="btn btn-primary">edit</a>
-                    <a href="{{ path('topics_viewer',{'id': topic.id}) }}" class="btn btn-default">Add visitors</a>
+                    <a href="{{ path('vu_topic_add_visitor',{'topicId': topic.id}) }}" class="btn btn-default">Add visitors</a>
                 </td>
             </tr>
         {% endfor %}

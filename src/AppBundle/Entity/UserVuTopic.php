@@ -23,8 +23,8 @@ class UserVuTopic
 
     /**
      * @var User
-     * @ORM\Column(name="user_id",nullable=false)
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id",nullable=false)
      */
     private $oUser;
     
