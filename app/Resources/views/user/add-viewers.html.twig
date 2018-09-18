@@ -6,31 +6,21 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Nom</th>
             <th>Prenom</th>
-            <th>Photo</th>
             <th>Pseudo</th>
-            <th>Datenaissance</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <form action="{{ path('topics_viewer',{'id': topic.id}) }}" method="post">
+        <form method="post" action="{{ path('topics_viewer',{'id':topic.id}) }}" >
                 {% for user in users %}
                     <tr>
-                        <td><a href="{{ path('users_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                         <td>{{ user.nom }}</td>
                         <td>{{ user.prenom }}</td>
-                        <td>
-                            <img src="{{ asset('/uploads/avatars/')~user.photo }}" class="rounded-circle" width="40" height="40">
-                        </td>
                         <td>{{ user.pseudo }}</td>
-                        <td>{% if user.dateNaissance %}{{ user.dateNaissance|date('d/m/Y') }}{% endif %}</td>
                         <td>
-                            <label>
-                                <input type="checkbox" name="users[]" value="{{ user.id }}"/>
-                            </label>
+                            {{ form_row(forms[user.id]) }}
                         </td>
                     </tr>
                 {% endfor %}
@@ -38,4 +28,11 @@
         </form>
         </tbody>
     </table>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(function () {
+            $("label").hide();
+        })
+    </script>
 {% endblock %}

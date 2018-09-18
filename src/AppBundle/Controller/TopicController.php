@@ -5,9 +5,13 @@ namespace AppBundle\Controller;
 use AppBundle\DTO\TopicDTO;
 use AppBundle\DTO\UserDTO;
 use AppBundle\Entity\Topic;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -149,33 +153,52 @@ class TopicController extends Controller
     
     /**
      * @Route("/{id}/viewers",name="topics_viewer")
-     * @Method("GET")
+     * @Method({"GET","POST"})
      * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
      * @param $id
      */
-    public function addVisitor($id){
+    public function addVisitor(Request $request,$id){
         $em = $this->getDoctrine()->getManager();
-        
-        $users = $em->getRepository('AppBundle:User')->findAll();
-        
         $topic = $em->getRepository(Topic::class)->find($id);
         
+        $users = $em->getRepository('AppBundle:User')->findAll();
+        $formBuilder = $this->createFormBuilder();
+        
+        foreach ($users as $user){
+            $formBuilder->add($user->getId(),CheckboxType::class,
+                array('label'=> $user->getNom(),'required' => false)
+            );
+        }
+        $formBuilder->add('add',SubmitType::class);
+        
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid() && $form->isSubmitted()){
+            $this->redirectToRoute("topics_index");
+            $users_id = $form->getData();
+            $userToDelete = [];
+            foreach ($users_id as $id=>$value){
+                if ($users_id[$id]===true){
+                           array_push($userToDelete,$users_id[$id]);
+                }
+            }
+        }
         return $this->render('user/add-viewers.html.twig', array(
+            'forms' => $form->createView(),
+            'topic' => $topic,
             'users' => $users,
-            'topic' => $topic
         ));
     }
     
     /**
      * @Route("/viewers",name="post_viewer")
-     * @Method("POST")
+     * @Method("GET")
      * @return void
-     * @param Request $request
-     * @param $id
+     * @param $data
      */
-    public function postVisitors(Request $request,$id){
-        $data = $request->request->all();
-        var_dump($data);
-        
+    public function postVisitors($data){
+       dump($data);
+       
     }
 }

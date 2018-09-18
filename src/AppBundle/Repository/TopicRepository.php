@@ -2,6 +2,9 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
+use Symfony\Component\Intl\Exception\NotImplementedException;
+
 /**
  * TopicRepository
  *
@@ -10,4 +13,7 @@ namespace AppBundle\Repository;
  */
 class TopicRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function viewTopic(User $user){
+        throw new NotImplementedException('Add your custom code here');
+    }
 }
