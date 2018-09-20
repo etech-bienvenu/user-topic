@@ -23,7 +23,7 @@ class UserVuTopic
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",fetch="EAGER")
      * @ORM\JoinColumn(name="user_id",nullable=false)
      */
     private $oUser;

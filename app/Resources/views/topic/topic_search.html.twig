@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Search Result</h1>
+
+    <p>
+        <strong>Topic : {{ topic.title }}</strong>
+    </p>
+    <p>
+        <strong>Author : {{ author.nom ~ author.prenom }}</strong>
+    </p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Photo</th>
+            <th>Pseudo</th>
+            <th>Date naisance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for uvTopic in viewers %}
+            <tr>
+                <td>{{ uvTopic.nom }}</td>
+                <td>{{ uvTopic.prenom }}</td>
+                <td>
+                    <img src="{{ asset('/uploads/avatars/')~uvTopic.photo }}" class="rounded-circle" width="40" height="40">
+                </td>
+                <td>{{ uvTopic.pseudo }}</td>
+                <td>{% if uvTopic.dateNaissance %}{{ uvTopic.dateNaissance|date('d/m/Y') }}{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Add visitors</h1>
+    
+        <h1 style="display: block;">Add visitors</h1>
 
+    <table>
+        <tr>
+            <strong>Topic: {{ topic.title }} </strong>
+        </tr>
+        <tr>
+            <strong> Author : {{ author.nom~author.prenom }} </strong>
+        </tr>
+    </table>
     <table class="table table-hover">
         <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Pseudo</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Pseudo</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
         <form method="post" action="{{ path('post_visitor') }}" >
             <input type="hidden" name="topicId" value="{{ topic.id }}">
-            {% for user in users %}
+            {% for user in users  %}
                     <tr>
                         <td>{{ user.nom }}</td>
                         <td>{{ user.prenom }}</td>

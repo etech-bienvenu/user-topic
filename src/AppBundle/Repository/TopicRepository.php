@@ -13,7 +13,5 @@ use Symfony\Component\Intl\Exception\NotImplementedException;
  */
 class TopicRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function viewTopic(User $user){
-        throw new NotImplementedException('Add your custom code here');
-    }
+
 }

@@ -55,9 +55,9 @@ class User
     private $pseudo;
     
     /**
-     * @var \DateTime
+     * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="date_naissance",type="datetime",nullable=false)
+     * @ORM\Column(name="date_naissance",type="string",nullable=false)
      */
     private $dateNaissance;
     
@@ -159,14 +159,14 @@ class User
     }
     
     /**
-     * @return \DateTime
+     * @return string
      */
     public function getDateNaissance(){
         return $this->dateNaissance;
     }
     
     /**
-     * @param \DateTime $dateNaissance
+     * @param string $dateNaissance
      */
     public function setDateNaissance($dateNaissance) {
         $this->dateNaissance = $dateNaissance;

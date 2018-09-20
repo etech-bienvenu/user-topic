@@ -2,17 +2,13 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\DTO\TopicDTO;
-use AppBundle\DTO\UserDTO;
 use AppBundle\Entity\Topic;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 /**
  * Topic controller.
@@ -30,11 +26,12 @@ class TopicController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        $authors = $em->getRepository(User::class)->findAll();
         $topics = $em->getRepository('AppBundle:Topic')->findAll();
-
+        
         return $this->render('topic/index.html.twig', array(
             'topics' => $topics,
+            'authors'=>$authors,
         ));
     }
     

@@ -60,12 +60,14 @@ class UserController extends Controller
             'form' => $form->createView(),
         ));
     }
-
+    
     /**
      * Finds and displays a user entity.
      *
      * @Route("/{id}", name="users_show")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @param User $user
      */
     public function showAction(User $user)
     {
@@ -76,17 +78,22 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+    
     /**
      * Displays a form to edit an existing user entity.
      *
      * @Route("/{id}/edit", name="users_edit")
      * @Method({"GET", "POST"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param User $user
      */
     public function editAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
+        
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -127,14 +134,13 @@ class UserController extends Controller
      *
      * @param User $user The user entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function createDeleteForm(User $user)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('users_delete', array('id' => $user->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

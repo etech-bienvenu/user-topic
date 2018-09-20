@@ -132,5 +132,16 @@ class Topic
     public function removeViewer(User $oUser){
         $this->aUserVueTopics->removeElement($oUser);
     }
+    
+    public function countViewer(){
+        return !empty($this->aUserVueTopics) ? $this->aUserVueTopics->count() : 0;
+    }
+    
+    /**
+     * @return ArrayCollection
+     */
+    public function getViewers(){
+        return $this->aUserVueTopics;
+    }
 }
 

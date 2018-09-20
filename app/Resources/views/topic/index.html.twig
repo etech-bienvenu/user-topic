@@ -1,5 +1,18 @@
 {% extends 'base.html.twig' %}
-
+{% block form %}
+    <form class="form-inline mt-2 mt-md-0" action="{{ path('search_topic') }}" method="post">
+        <input class="form-control mr-sm-2"
+               type="text"
+               name="topicTitle"
+               placeholder="Topic title" aria-label="Search">
+            <select name="authorId"  class="form-control mr-sm-2" >
+                {% for author in authors %}
+                    <option value="{{ author.id }}">{{ author.nom }}</option>
+                {% endfor %}
+            </select>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+{% endblock %}
 {% block body %}
     <h1>Topics list</h1>
 
@@ -20,7 +33,7 @@
                 <td>{{ topic.title }}</td>
                 <td>{{ topic.oUser.nom ~ topic.oUser.prenom }}</td>
                 <td>
-                    {{ 1 }}
+                    {{ 1 + topic.countViewer() }}
                 </td>
                 <td>
                     <a href="{{ path('topics_show', { 'id': topic.id }) }}" class="btn btn-default">show</a>

@@ -58,6 +58,10 @@ class ComposerStaticInit8ccbfbd7a918cfc1a56fba628596ab68
         array (
             'Monolog\\' => 8,
         ),
+        'L' => 
+        array (
+            'Liip\\ImagineBundle\\' => 19,
+        ),
         'K' => 
         array (
             'Knp\\Bundle\\PaginatorBundle\\' => 27,
@@ -194,6 +198,10 @@ class ComposerStaticInit8ccbfbd7a918cfc1a56fba628596ab68
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Liip\\ImagineBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liip/imagine-bundle',
+        ),
         'Knp\\Bundle\\PaginatorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle',
@@ -260,6 +268,13 @@ class ComposerStaticInit8ccbfbd7a918cfc1a56fba628596ab68
             'Knp\\Component' => 
             array (
                 0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'D' => 
